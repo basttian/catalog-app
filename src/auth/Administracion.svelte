@@ -12,16 +12,19 @@
   import catalog from "../component/Home.svelte";
   import login from "./Login.svelte";
   import administracion from "./Administracion.svelte";
+  
 
 /* Menu */
   import Configuracion from "./Configuracion.svelte";
   import Categoria from './Categoria.svelte';
   import Productos from './Productos.svelte';
+  //import ProductList from './ProductList.svelte';
 
   const menus = [
-    {title: 'Configuracion' , component: Configuracion},
-    {title: 'Categoria'     , component: Categoria},
-    {title: 'Productos'     , component: Productos},
+    {title: 'Configuracion'      , component: Configuracion},
+    {title: 'Categoria'          , component: Categoria},
+    {title: 'Productos'          , component: Productos},
+    //{title: 'Lista de productos' , component: ProductList},
   ]
 
   let menuValue = menus[0];
@@ -38,7 +41,9 @@
   <li class="uk-active"><a on:click={()=>menuValue = menus[0]} href="javascript:void(0)">Administracion</a></li>
   <li><a on:click={()=>menuValue = menus[1]} href="javascript:void(0)">Categoria</a></li>
   <li><a on:click={()=>menuValue = menus[2]} href="javascript:void(0)">Productos</a></li>
+  <!-- <li><a on:click={()=>menuValue = menus[3]} href="javascript:void(0)">Lista de Productos</a></li> -->
 </ul>
+
 
 <div class="uk-container">
   <svelte:component this={menuValue.component}/>
