@@ -1,4 +1,4 @@
-import { readable, writable } from 'svelte/store'
+import { derived,  readable, writable } from 'svelte/store'
 
 //I Love
 export const usuario =  writable(false);
