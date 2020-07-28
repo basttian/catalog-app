@@ -24,7 +24,7 @@
     {title: 'Productos'     , component: Productos},
   ]
 
-  let menuValue = menus[2];
+  let menuValue = menus[0];
 
 /* Fin menu */
 

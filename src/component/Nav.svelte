@@ -15,6 +15,7 @@
   }
 
 
+
 </script>
 
 <div uk-sticky>
@@ -40,7 +41,7 @@
 {#if $cesta > 0}
               {#each $product as value, i}
                 <li>
-                  <a on:click={()=>removeItemFromCart(value)} href="javascript:void(0)"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> {value.producto} por {value.cantidad} uni. ${value.precio*value.cantidad} </a>
+                  <a on:click={()=>removeItemFromCart(value)} href="javascript:void(0)"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> {value.producto} por {value.cantidad} uni. ${(value.precio*value.cantidad).toFixed(2)} </a>
                 </li>
               {/each}
                 <li class="uk-nav-divider"></li>

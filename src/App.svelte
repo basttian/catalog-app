@@ -54,15 +54,19 @@
     });
   }
 
-
-
   import { Router, Route, Link } from 'yrv';
   import NAV from "./component/Nav.svelte";
 
-  import catalog from "./component/Home.svelte";
+  import home from "./component/Home.svelte";
   import admin from "./auth/Protected.svelte";
   import administracion from "./auth/Administracion.svelte";
 
+  import catalogc from "./component/Catalogc.svelte"
+  import catalogs from "./component/Catalogs.svelte"
+
+  /* Menu */
+  import DocumentSubtract24 from "carbon-icons-svelte/lib/DocumentSubtract24";
+  let categoriasData, subCategoriaData;
 
 </script>
 
@@ -71,23 +75,34 @@
 </svelte:head>
 
 <NAV />
+<FirebaseApp {firebase}>
 
 <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
     <div class="uk-offcanvas-bar">
         <button class="uk-offcanvas-close" type="button" uk-close></button>
-        <h3>Title</h3>
+        <h3><DocumentSubtract24 /> Menu</h3>
         <ul class="uk-nav uk-nav-default">
+<Collection path={`categorias`} let:data={categoriasData} let:ref={categoriaReference} log>
+<div slot="loading"><div uk-spinner></div></div>
             <li>
-              <Link class="uk-text-secondary" href="/component/catalog"> Home</Link>
+              <Link class="uk-text-secondary" href="/component/home"> Home</Link>
             </li>
+            {#each categoriasData as values}
             <li class="uk-parent">
-                <a href="#">Parent</a>
-                <ul class="uk-nav-sub">
-                    <li><a href="#">Sub item</a></li>
-                    <li><a href="#">Sub item</a></li>
+              <Link href="/component/catalogc/{values.id}">{values.categoria}</Link>
+              <Collection path={`subcategorias`} query={ref=>ref.where('categoria','==',`${values.id}`)} let:data={subCategoriaData} let:ref={subCategoriaReference} log>
+              <div slot="loading"><div uk-spinner></div></div>
+              {#each subCategoriaData as item}
+                 <ul class="uk-nav-sub">
+                    <li><Link href="/component/catalogs/{item.id}">{item.subcategoria}</Link></li>
                 </ul>
+              {/each}
+              </Collection>
             </li>
+            {/each}
             
+</Collection>
+<li class="uk-nav-divider"></li>
 {#if !$usuario}
     <li><Link class="uk-text-secondary" href="/auth/protected"><span uk-icon="sign-in"></span> Administración</Link></li>
 {:else}
@@ -103,13 +118,16 @@
     </div>
 </div>
 
+</FirebaseApp>
 
 
 <div class="uk-container">
   <Router>
-      <Route exact component={catalog}/>
-      <Route exact path="/component/catalog" component={catalog}/>
+      <Route exact component={home}/>
+      <Route exact path="/component/home" component={home}/>
       <Route exact path="/auth/protected" component={admin}/>
       <Route exact path="/auth/administracion" component={administracion}/>
+      <Route path="/component/catalogc/:id" exact component={catalogc} />
+      <Route path="/component/catalogs/:id" exact component={catalogs} />
   </Router>
 </div>

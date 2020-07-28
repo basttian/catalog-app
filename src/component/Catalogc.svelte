@@ -1,9 +1,15 @@
 <script>
   import { FirebaseApp, User, Doc, Collection } from "sveltefire";
   import firebase from "firebase/app";
-
+  import { Link } from "yrv";
   let count_value = [];
-  $: query = (ref) => ref.orderBy("created","desc").limit(20);
+  export let router = {};
+  let id = null;
+  $: {
+    id = router.params ? router.params.id : null;
+  }
+
+  $: query = (ref) => ref.where("categoria", "==", id);
 
   import { product, cesta } from '../Store/store.js';
 
@@ -36,7 +42,7 @@ function handleClick(c,p,cc) {
 </script>
 
 <svelte:head>
-<title>Catalogo</title>
+<title>Articulos por categorias</title>
 </svelte:head>
 
 <div class="uk-position-center">

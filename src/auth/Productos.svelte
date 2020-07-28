@@ -66,7 +66,10 @@
                 <textarea class="uk-textarea" bind:value={descripcionArticulo} rows="5" placeholder="Descripcion Corta*"></textarea>
             </div>
             <div class="uk-width-1-2@s">
-                <input class="uk-input" bind:value={urlImagenArticulo} type="text" placeholder="https:// url.imagen 400x600 px">
+                <div class="uk-inline">
+                <a class="uk-form-icon uk-form-icon-flip" href="https://imgur.com/" target="_blank" uk-tooltip="title: Imgur" uk-icon="icon: image"></a>
+                <input class="uk-input uk-form-width-large" bind:value={urlImagenArticulo} type="text" placeholder="https:// url.imagen 400x600 px">
+                </div>
             </div>
               <div class="uk-width-1-4@s">
                 <div class="uk-inline">

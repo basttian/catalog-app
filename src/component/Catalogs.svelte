@@ -1,11 +1,17 @@
 <script>
   import { FirebaseApp, User, Doc, Collection } from "sveltefire";
   import firebase from "firebase/app";
-
+  import { Link } from "yrv";
   let count_value = [];
-  $: query = (ref) => ref.orderBy("created","desc").limit(20);
+  export let router = {};
+  let id = null;
+  $: {
+    id = router.params ? router.params.id : null;
+  }
 
-  import { product, cesta } from '../Store/store.js';
+  $: query = (ref) => ref.where("subcategoria", "==", id);
+
+    import { product, cesta } from '../Store/store.js';
 
   let arr = [];
   let promise;
@@ -15,8 +21,6 @@
     await arr.push({producto:producto,precio:precio,cantidad:cantidad});
     await cesta.update(n => n + 1);
     await product.update( u => arr );
-
-    console.log($product);
 
    }else if( arr.findIndex(x => x.producto === producto) > -1 ){
        //console.log(producto + ' ya se encuentra en la cesta de compras.');
@@ -36,7 +40,7 @@ function handleClick(c,p,cc) {
 </script>
 
 <svelte:head>
-<title>Catalogo</title>
+<title>Articulos por sub-categorias</title>
 </svelte:head>
 
 <div class="uk-position-center">
