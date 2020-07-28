@@ -11,45 +11,13 @@
 
   $: query = (ref) => ref.where("categoria", "==", id);
 
-  import { product, cesta } from '../Store/store.js';
-
-  let arr = [];
-  let promise;
-
-  const addProductToCart = async(producto, precio, cantidad) => {
-    if(arr.findIndex(x => x.producto === producto) === -1 ){
-    await arr.push({producto:producto,precio:precio,cantidad:cantidad});
-    await cesta.update(n => n + 1);
-    await product.update( u => arr );
-
-    console.log($product);
-
-   }else if( arr.findIndex(x => x.producto === producto) > -1 ){
-       //console.log(producto + ' ya se encuentra en la cesta de compras.');
-        UIkit.notification({
-            message: `<span uk-icon="icon: warning"></span> ${producto}, ya se encuentra en la cesta de compras.`,
-            status: 'danger',
-            pos: 'top-center',
-            timeout: 2000
-        });
-    }
-  } 
-
-function handleClick(c,p,cc) {
-    promise = addProductToCart(c,p,cc);
-  }
+  import BTN from './Button.svelte';  
 
 </script>
 
 <svelte:head>
 <title>Articulos por categorias</title>
 </svelte:head>
-
-<div class="uk-position-center">
-    {#await promise }
-      <div uk-spinner="ratio: 3"></div>
-    {/await}
-</div>
 
 <FirebaseApp {firebase}>
 <Collection path={'productos'} {query} let:data let:ref log>
@@ -66,12 +34,7 @@ function handleClick(c,p,cc) {
             </div>
                
 <!-- Botn add CArt -->
-<a class="uk-position-absolute uk-transform-center" 
- style="left: 25%; top: 25%" href="javascript:void(0);" 
- uk-tooltip="Agregar al carrito" 
- on:click={() => handleClick( item.codigo, item.precio, isNaN(count_value[index])?1:count_value[index] )} >
-<span class="uk-icon-button" uk-icon="icon: cart;ratio:1.5"></span> 
-</a>
+<BTN codigoProducto={item.codigo} precioProducto={item.precio} cantidadProducto={count_value[index]} />
 
                 <a class="uk-position-absolute uk-transform-center" 
                     style="left: 70%; top: 20%" href="javascript:void(0);">

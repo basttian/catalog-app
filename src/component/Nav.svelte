@@ -14,7 +14,7 @@
       }
   }
 
-
+console.log($product)
 
 </script>
 
@@ -40,9 +40,11 @@
             <ul class="uk-nav uk-dropdown-nav">
 {#if $cesta > 0}
               {#each $product as value, i}
-                <li>
-                  <a on:click={()=>removeItemFromCart(value)} href="javascript:void(0)"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> {value.producto} por {value.cantidad} uni. ${(value.precio*value.cantidad).toFixed(2)} </a>
-                </li>
+                  {#if i != 0}
+                    <li>
+                      <a on:click={()=>removeItemFromCart(value)} href="javascript:void(0)"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> {value.producto} por {value.cantidad} uni. ${(value.precio*value.cantidad).toFixed(2)} </a>
+                    </li> 
+                  {/if}
               {/each}
                 <li class="uk-nav-divider"></li>
                 <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: whatsapp"></span> Contacta al vendedor por estos productos.</a></li>
