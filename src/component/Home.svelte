@@ -31,14 +31,22 @@
 <!-- Botn add CArt -->
 <BTN codigoProducto={item.codigo} precioProducto={item.precio} cantidadProducto={count_value[index]} />
 
-                <a class="uk-position-absolute uk-transform-center" 
+                <a class="uk-position-absolute uk-transform-center bkg-button-social uk-border-circle" 
                     style="left: 70%; top: 20%" href="javascript:void(0);">
-                <span class="uk-icon-button" uk-icon="icon: social;ratio:1.5"></span> 
+<div class="uk-animation-toggle" tabindex="0">
+        <div class="uk-transform-origin-top-center uk-animation-scale-up">
+            <span uk-icon="icon: social;ratio:2"></span> 
+        </div>
+</div>
                 </a>
                 <div uk-dropdown="pos: bottom-justify">
                     <ul class="uk-nav uk-dropdown-nav">
                         <li>
                             <a href="https://api.whatsapp.com/send?phone=542664003830&text={item.codigo}%20precio${item.precio}" target="_blank"><span uk-icon="icon: whatsapp"></span> Whatsapp</a>
+                        </li>
+                        <li class="uk-nav-divider"></li>
+                        <li>
+                        <a href="https://www.messenger.com/t/diego.sebastian.0" target="_blank"><span uk-icon="icon: facebook"></span> Facebook</a>
                         </li>
                         <li class="uk-nav-divider"></li>
                         <li>

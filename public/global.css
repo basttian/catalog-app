@@ -22,3 +22,22 @@
 .hand{
     cursor: pointer;
 }
+
+
+.bkg-button-cart{
+   padding: 1em ;
+   width: 3em;
+   height: 3em;
+   background-color: #1d1f21 !important;
+   opacity: 0.3;
+   border: 0.01em solid #2498F3;
+}
+
+.bkg-button-social{
+    padding: 1em ;
+    width: 2em;
+    height: 2em;
+    background-color: #1d1f21 !important;
+    opacity: 0.5;
+    border: 0.01em solid #2498F3;
+ }

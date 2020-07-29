@@ -1,5 +1,5 @@
 {
-  "name": "svelte-app",
+  "name": "catalog-app",
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "firebase": "^7.16.1",
+    "lodash": "^4.17.19",
     "sirv-cli": "^0.4.4",
     "sveltefire": "^0.1.5",
     "yrv": "0.0.30"
