@@ -14,8 +14,6 @@
       }
   }
 
-console.log($product)
-
 </script>
 
 <div uk-sticky>

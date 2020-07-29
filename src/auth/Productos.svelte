@@ -80,7 +80,7 @@
             <div class="uk-width-1-4@s">
                 <div class="uk-inline">
                     <span class="uk-form-icon" uk-icon="icon: credit-card"></span>
-                    <input class="uk-input" bind:value={precioArticulo} type="number" min="1" placeholder="Precio*">
+                    <input class="uk-input" bind:value={precioArticulo} type="text" placeholder="Precio*">
                 </div>
             </div>
             <div class="uk-width-1-1">
@@ -92,8 +92,8 @@
                 nombre: nombreArticulo,
                 descripcion: descripcionArticulo,
                 codigo: codigoArticulo,
-                precio: precioArticulo,
-                disponibles: disponibles,
+                precio: Number(precioArticulo),
+                disponibles: Number(disponibles),
                 urlImagen: urlImagenArticulo.trim(),
             }).then(()=>{
                 //console.log("Articulo Agregado con exito")
