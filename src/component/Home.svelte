@@ -61,7 +61,7 @@
                     bind:value={count_value[index]} 
                     min=1 
                     max={item.disponibles} 
-                    on:change={({ target: { value } }) => {
+                    on:blur={({ target: { value } }) => {
                         if(value==item.disponibles){
                             UIkit.notification({
                                 message: `<span uk-icon="icon: warning"></span> ${item.disponibles} artículos disponibles.`,

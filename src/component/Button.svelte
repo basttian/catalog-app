@@ -39,7 +39,7 @@ function handleClick(c,p,cc) {
 
  
  <a class="uk-position-absolute uk-transform-center bkg-button-cart uk-border-circle uk-text-primary" 
- style="left: 25%; top: 25%" href="javascript:void(0);" 
+ style="left: 35%; top: 25%" href="javascript:void(0);" 
  uk-tooltip="Agregar al carrito" 
  on:click={() => handleClick( codigoProducto, precioProducto, isNaN(cantidadProducto)?1:cantidadProducto )} >
     <div class="uk-animation-toggle" tabindex="0">
