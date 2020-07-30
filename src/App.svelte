@@ -65,7 +65,6 @@
   import catalogs from "./component/Catalogs.svelte"
 
   /* Menu */
-  import DocumentSubtract24 from "carbon-icons-svelte/lib/DocumentSubtract24";
   let categoriasData, subCategoriaData;
 
 </script>
@@ -76,50 +75,51 @@
 
 <NAV />
 <FirebaseApp {firebase}>
-
 <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
     <div class="uk-offcanvas-bar">
         <button class="uk-offcanvas-close" type="button" uk-close></button>
-        <h3><DocumentSubtract24 /> Menu</h3>
-        <ul class="uk-nav uk-nav-default">
+        <h3><Link class="uk-text-lead" href="/component/home"><span class="uk-margin-small-right" uk-icon="icon: home;ratio:1.5"></span> Página principal</Link></h3>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <Collection path={`categorias`} let:data={categoriasData} let:ref={categoriaReference} log>
 <div slot="loading"><div uk-spinner></div></div>
-            <li>
-              <Link class="uk-text-secondary" href="/component/home"> Home</Link>
-            </li>
-            {#each categoriasData as values}
-            <li class="uk-parent">
-              <Link href="/component/catalogc/{values.id}">{values.categoria}</Link>
-              <Collection path={`subcategorias`} query={ref=>ref.where('categoria','==',`${values.id}`)} let:data={subCategoriaData} let:ref={subCategoriaReference} log>
-              <div slot="loading"><div uk-spinner></div></div>
-              {#each subCategoriaData as item}
-                 <ul class="uk-nav-sub">
-                    <li><Link href="/component/catalogs/{item.id}">{item.subcategoria}</Link></li>
-                </ul>
-              {/each}
-              </Collection>
-            </li>
-            {/each}
-            
-</Collection>
-<li class="uk-nav-divider"></li>
-{#if !$usuario}
-    <li><Link class="uk-text-secondary" href="/auth/protected"><span uk-icon="sign-in"></span> Administración</Link></li>
-{:else}
-    <li class="uk-nav-header">Administracion</li>
+<ul uk-accordion>
+  {#each categoriasData as values}
     <li>
-        <Link href="/auth/administracion"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Administración</Link>
+        <Link class="uk-accordion-title" href="/component/catalogc/{values.id}">{values.categoria}</Link>
+        <div class="uk-accordion-content">
+            <Collection path={`subcategorias`} query={ref=>ref.where('categoria','==',`${values.id}`)} let:data={subCategoriaData} let:ref={subCategoriaReference} log>
+            <ul class="uk-list uk-list-divider">
+              {#each subCategoriaData as item}
+                <li><span uk-icon="icon: chevron-double-right"></span> <Link href="/component/catalogs/{item.id}">{item.subcategoria}</Link></li>
+              {/each}
+            </ul>
+            </Collection>
+        </div>
     </li>
-    <li class="uk-nav-divider"></li>
-    <li><a class="uk-text-secondary" on:click={Salir} href="javascript:void(0)"><span uk-icon="sign-out"></span> Salir</a></li>
-{/if}
-
-        </ul>
+  {/each}
+</ul>
+</Collection>
+<div class="uk-position-bottom uk-margin-medium-left">
+<ul class="uk-list" >
+  <li class="uk-nav-divider"></li>
+  {#if !$usuario}
+      <li>
+        <Link class="uk-link-heading" href="/auth/protected"><span uk-icon="sign-in"></span> Ingresar</Link>
+      </li>
+  {:else}
+      <li class="uk-nav-header">Administracion</li>
+      <li>
+          <Link href="/auth/administracion"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Administración</Link>
+      </li>
+      <li class="uk-nav-divider"></li>
+      <li><a class="uk-text-secondary" on:click={Salir} href="javascript:void(0)"><span uk-icon="sign-out"></span> Salir</a></li>
+  {/if}
+</ul>
+</div>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     </div>
 </div>
-
 </FirebaseApp>
-
 
 <div class="uk-container">
   <Router>
@@ -129,5 +129,9 @@
       <Route exact path="/auth/administracion" component={administracion}/>
       <Route path="/component/catalogc/:id" exact component={catalogc} />
       <Route path="/component/catalogs/:id" exact component={catalogs} />
-  </Router>
+  </Router> 
+</div>
+
+<div class="uk-visible@s uk-overlay uk-overlay-default">
+    <span class="uk-text-meta uk-align-right">Cybernetically enhanced web apps |<a class="uk-text-warning" href="https://svelte.dev/" target="_blank">| svelte.</a></span>
 </div>

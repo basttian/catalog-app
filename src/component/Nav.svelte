@@ -22,11 +22,11 @@ let pedido='';
   _.forEach($product, function(value, key) {
     if(key != 0){
     arrPedido.push(value.producto,value.cantidad);
-     console.log(_.groupBy(arrPedido,[key]))
+     //console.log(_.groupBy(arrPedido,[key]))
     return pedido = _.join(arrPedido,' - ');
     }
   })
-   console.log( pedido ) 
+   //console.log( pedido ) 
    event.stopPropagation(); 
  }
   

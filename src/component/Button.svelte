@@ -50,6 +50,32 @@ function handleClick(c,p,cc) {
 </a>
 
 
+ <a class="uk-position-absolute uk-transform-center bkg-button-social uk-border-circle" 
+                    style="left: 70%; top: 20%" href="javascript:void(0);">
+<div class="uk-animation-toggle" tabindex="0">
+        <div class="uk-transform-origin-top-center uk-animation-scale-up">
+            <span uk-icon="icon: social;ratio:2"></span> 
+        </div>
+</div>
+                </a>
+                <div uk-dropdown="pos: bottom-justify">
+                    <ul class="uk-nav uk-dropdown-nav">
+                        <li>
+                            <a href="https://api.whatsapp.com/send?phone=542664003830&text={codigoProducto}%20precio${precioProducto}" target="_blank"><span uk-icon="icon: whatsapp"></span> Whatsapp</a>
+                        </li>
+                        <li class="uk-nav-divider"></li>
+                        <li>
+                        <a href="https://www.messenger.com/t/diego.sebastian.0" target="_blank"><span uk-icon="icon: facebook"></span> Facebook</a>
+                        </li>
+                        <li class="uk-nav-divider"></li>
+                        <li>
+                            <a href="mailto:sebastianjof@gmail.com?subject=Consulta&body={codigoProducto}" target="_blank"><span uk-icon="icon: mail"></span> e-mail</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+
 <!-- on:click={() => addProductToCart( item.codigo, item.precio, isNaN(count_value[index])?1:count_value[index] )}  -->
 
 <div class="uk-position-center">
