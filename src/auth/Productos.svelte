@@ -16,6 +16,8 @@
     let codigoArticulo;
     let disponibles;
     let urlImagenArticulo ='';
+    let status = false;
+    let chunk = false;
 
     /*https://ibm.github.io/carbon-icons-svelte/?ref=madewithsvelte.com*/
     import Product32 from "carbon-icons-svelte/lib/Product32";
@@ -31,6 +33,15 @@
 <fieldset class="uk-fieldset">
     <legend class="uk-legend"><Product32 /> Añadir nuevo producto</legend>
 <form on:submit|preventDefault={()=>{console.log("Send..")}} class="uk-grid-small uk-margin" uk-grid >
+
+ <!-- Solo por pedido -->
+        <div class="uk-width-1-2@s">
+        <label><input class="uk-checkbox"  type="checkbox"   bind:checked={status}  > Mostrar artículo.</label>
+        </div>
+        <div class="uk-width-1-2@s">
+        <label><input class="uk-checkbox"  type="checkbox"   bind:checked={chunk}  > Marcar solo por pedido.</label>
+        </div>
+
     <div class="uk-width-1-1">
         <label class="uk-form-label" for="form-stacked-text">Cod. Articulo</label>
         <div class="uk-form-controls">
@@ -95,6 +106,8 @@
                 precio: Number(precioArticulo),
                 disponibles: Number(disponibles),
                 urlImagen: urlImagenArticulo.trim(),
+                status:status,
+                chunk:chunk
             }).then(()=>{
                 //console.log("Articulo Agregado con exito")
                 categoria='';
@@ -105,6 +118,8 @@
                 precioArticulo='';
                 disponibles='';
                 urlImagenArticulo='';
+                status = false;
+                chunk = false;
                 UIkit.notification({message: "<span uk-icon='icon: check'></span> Artículo agregado correctamente.", pos: 'top-center', status: 'primary',timeout: 1000 })
             }).catch((error)=>{console.log(error)})}
             disabled={!nombreArticulo || !precioArticulo || !descripcionArticulo }>Guardar</button>

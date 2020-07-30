@@ -6,6 +6,7 @@
  let pData;
 
 let cod,nombre,precio,disponibles,descripcion,imagen;
+let status,chunk = false;
 
 </script>
 
@@ -22,31 +23,37 @@ let cod,nombre,precio,disponibles,descripcion,imagen;
         </div>
         <div class="uk-modal-body">
         <form class="uk-grid-small" uk-grid on:submit|preventDefault>
-        
+        <!-- Solo por pedido -->
         <div class="uk-width-1-2@s">
-            <label class="uk-form-label" for="form-s">Cod. Artículo</label>
-            <input class="uk-input" value={pData.codigo} bind:this={cod} id="form-s" type="text" >
+        <label><input class="uk-checkbox"  type="checkbox" bind:this={status} checked={pData.status}  > Mostrar artículo.</label>
         </div>
         <div class="uk-width-1-2@s">
-            <label class="uk-form-label" for="form-stacked-text">Nombre del Artículo</label>
-            <input class="uk-input" value={pData.nombre} bind:this={nombre} id="form-s" type="text" >
+        <label><input class="uk-checkbox"  type="checkbox"  bind:this={chunk}  checked={pData.chunk}  > Marcar solo por pedido.</label>
+        </div>
+        <div class="uk-width-1-2@s">
+            <label class="uk-form-label" >Cod. Artículo</label>
+            <input class="uk-input" value={pData.codigo} bind:this={cod}  type="text" >
+        </div>
+        <div class="uk-width-1-2@s">
+            <label class="uk-form-label" >Nombre del Artículo</label>
+            <input class="uk-input" value={pData.nombre} bind:this={nombre}  type="text" >
         </div>
             <div class="uk-width-1-4@s">
-            <label class="uk-form-label" for="form-s">$ Precio</label>
-            <input class="uk-input" value={pData.precio} bind:this={precio} id="form-s" type="text" >
+            <label class="uk-form-label" >$ Precio</label>
+            <input class="uk-input" value={pData.precio} bind:this={precio}  type="text" >
         </div>
         <div class="uk-width-1-4@s">
-            <label class="uk-form-label" for="form-s">Disponibles</label>
-            <input class="uk-input" value={pData.disponibles} bind:this={disponibles} id="form-s" type="number" min="1" >
+            <label class="uk-form-label" >Disponibles</label>
+            <input class="uk-input" value={pData.disponibles} bind:this={disponibles}  type="number" min="1" >
         </div>
         <div class="uk-width-1-2@s">
-            <label class="uk-form-label" for="form-stacked-text">Descripción</label>
-            <textarea class="uk-textarea" id="form-s" rows="3" bind:this={descripcion} >{pData.descripcion}</textarea>
+            <label class="uk-form-label" >Descripción</label>
+            <textarea class="uk-textarea"  rows="3" bind:this={descripcion} >{pData.descripcion}</textarea>
         </div>
         <div class="uk-width-1-1">
             <div class="uk-inline">
-                <a class="uk-form-icon uk-form-icon-flip" href="https://imgur.com/" target="_blank" uk-tooltip="title: Imgur" uk-icon="icon: image"></a>
-            <input class="uk-input uk-form-width-large" value={pData.urlImagen} bind:this={imagen} id="form-s" type="text" >
+            <a class="uk-form-icon uk-form-icon-flip" href="https://imgur.com/" target="_blank" uk-tooltip="title: Imgur" uk-icon="icon: image"> </a>
+            <input class="uk-input uk-form-width-large" value={pData.urlImagen} bind:this={imagen}  type="text" >
             </div>
         </div>
         </form>
@@ -71,7 +78,9 @@ let cod,nombre,precio,disponibles,descripcion,imagen;
                 precio:Number(precio.value),
                 disponibles:Number(disponibles.value),
                 descripcion:descripcion.value,
-                urlImagem:imagen.value.trim()
+                urlImagen:imagen.value.trim(),
+                status:status.checked,
+                chunk:chunk.checked
                 }).then(()=>{
                 UIkit.modal("#modal-sections").hide();
                 UIkit.notification({message: "<span uk-icon='icon: check'></span> Artículo actualizado con éxito.", pos: 'top-center', status: 'primary'})

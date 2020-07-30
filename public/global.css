@@ -42,4 +42,11 @@
     border: 0.01em solid #2498F3;
  }
 
- 
+.bkg-aviso{
+    width: max-content;
+    padding: 0.5em;
+    height: auto;
+    background-color: #1d1f21 !important;
+    opacity: 0.5;
+    border: 0.01em solid #2498F3;
+}

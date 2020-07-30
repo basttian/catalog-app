@@ -48,7 +48,7 @@ let pedido='';
         <li class="uk-parent">
           <a class="uk-float-right" href="javascript:void(0)">
             <ShoppingCart32 />
-            <span class="uk-badge uk-margin-right">{isNaN($qty)?$cesta:$qty}</span>
+            <span class="uk-badge uk-margin-right">{isNaN(Number($qty))?0:Number($qty)}</span>
           </a>
         </li>
       </ul>

@@ -37,6 +37,20 @@
       UIkit.modal("#modal-sections").show();
   }
 
+  /* Update in List */
+  function updateStatus(id,status,chunk){
+     db.collection('productos').doc(id).update({
+        "status": status,
+        "chunk":chunk
+    }).then(()=>{
+         UIkit.notification({
+            message: 'Artículo actualizado!',
+            status: 'primary',
+            pos: 'top-center',
+            timeout: 1000
+         })
+      })
+  }
 
 </script>
 
@@ -73,24 +87,39 @@
         <caption></caption>
         <thead>
           <tr>
+            <th>Estado</th>
             <th>Cod</th>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Disponibles</th>
             <th>Descripcion</th>
             <th>Foto</th>
+            <th>Por pedido</th>
           </tr>
         </thead>
         <tbody>
             {#each productData as item}
+                <!-- on:click={()=> {OpenModal(item.id, item.codigo )}} -->
                 
-                <tr class="hand" on:click={()=> {OpenModal(item.id, item.codigo )}} >
-                    <td>{item.codigo}</td>
-                    <td>{item.nombre}</td>
-                    <td>{item.precio}</td>
-                    <td>{item.disponibles}</td>
-                    <td>{item.descripcion}</td>
-                    <td><img src={item.urlImagen} width="50" height="50" alt={item.nombre} ></td>
+                   <tr>
+
+                     <td>
+                     <input uk-tooltip="title: Estado; pos: right" class="uk-checkbox" type="checkbox"  bind:checked={item.status} 
+                     on:change={()=> updateStatus(item.id,item.status,item.chunk )} >
+                     </td>
+                    
+                    <td class="hand" on:click={()=> {OpenModal(item.id, item.codigo )}} >{item.codigo}</td>
+                    <td class="hand" on:click={()=> {OpenModal(item.id, item.codigo )}} >{item.nombre}</td>
+                    <td class="hand" on:click={()=> {OpenModal(item.id, item.codigo )}} >{item.precio}</td>
+                    <td class="hand" on:click={()=> {OpenModal(item.id, item.codigo )}} >{item.disponibles}</td>
+                    <td class="hand" on:click={()=> {OpenModal(item.id, item.codigo )}} >{item.descripcion}</td>
+                    <td class="hand" on:click={()=> {OpenModal(item.id, item.codigo )}} ><img src={item.urlImagen} width="50" height="50" alt={item.nombre} ></td>
+
+                    <td>
+                     <input uk-tooltip="title: Solo pedido; pos: left" class="uk-checkbox" type="checkbox"  bind:checked={item.chunk} 
+                     on:change={()=> updateStatus(item.id,item.status,item.chunk )} >
+                     </td>
+
                 </tr>
                
             {/each}

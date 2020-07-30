@@ -34,27 +34,37 @@
             </div>
                
 <!-- Boton -->
-<BTN codigoProducto={item.codigo} precioProducto={item.precio} cantidadProducto={count_value[index]} />
+<BTN codigoProducto={item.codigo} precioProducto={item.precio} cantidadProducto={count_value[index]} boleambtnsendcart={item.chunk} />
+<div class="uk-position-bottom-center uk-overlay uk-panel uk-margin-top">
+<h1>${isNaN(item.precio*count_value[index])?(item.precio).toFixed(2):(item.precio*count_value[index]).toFixed(2)}</h1>
 
-                <div class="uk-position-bottom-center uk-overlay uk-panel uk-margin-top">
-                    <h1>${isNaN(item.precio*count_value[index])?(item.precio).toFixed(2):(item.precio*count_value[index]).toFixed(2)}</h1>
-                    <p>{item.codigo} - Cantidad: {isNaN(count_value[index])?1:count_value[index]} </p>
-                    <input type=range 
-                    bind:value={count_value[index]} 
-                    min=1 
-                    max={item.disponibles} 
-                    on:change={({ target: { value } }) => {
-                        if(value==item.disponibles){
-                            UIkit.notification({
-                                message: `<span uk-icon="icon: warning"></span> ${item.disponibles} artículos disponibles.`,
-                                status: 'danger',
-                                pos: 'top-center',
-                                timeout: 1000
-                            });
-                        }
-                        }}
-                    >
+{#if !item.chunk}
+     
+<p>{item.codigo} - Cantidad: {isNaN(count_value[index])?1:count_value[index]} </p>
+    <input type=range 
+    bind:value={count_value[index]}
+    min=1
+    max={item.disponibles}
+    on:change={({ target: { value } }) => {
+        if(value==item.disponibles){
+            UIkit.notification({
+                message: `<span uk-icon="icon: warning"></span> ${item.disponibles} artículos disponibles.`,
+                status: 'danger',
+                pos: 'top-center',
+                timeout: 1000
+            });
+        }
+        }}
+    >
+
+{:else}
+
+ <h4 class="bkg-aviso" >{item.codigo} - Solo por pedido.</h4>
+
+{/if}
+
                 </div> 
+
         </li>
         {/each}
     </ul>
